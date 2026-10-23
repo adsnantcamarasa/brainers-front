@@ -4,7 +4,11 @@ import {Note} from './note/note';
 @Component({
   imports: [Note],
   selector: 'app-note-list',
-  styleUrl: './note-list.css',
-  templateUrl: './note-list.html',
+  template: `
+    <ul class="flex flex-col gap-3">
+    <li>
+      <app-note />
+    </li>
+  </ul>`,
 })
 export class NoteList {}

@@ -5,8 +5,12 @@ import {Navbar} from './navbar/navbar';
 @Component({
   imports: [RouterOutlet, Navbar],
   selector: 'app-root',
-  styleUrl: './app.css',
-  templateUrl: './app.html'
+  template: `
+    <app-navbar />
+        <main class="mx-auto max-w-3xl px-4 py-8">
+            <router-outlet />
+        </main>
+  `
 })
 
 export class App {
