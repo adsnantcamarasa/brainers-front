@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import {NoteSearch} from './note-search/note-search';
-import {NoteList} from './note-list/note-list';
+import {NoteSearch} from '../../components/note-search/note-search';
+import {NoteList} from '../../components/note-list/note-list'
+import {RouterLink} from '@angular/router';
 
 @Component({
-  imports: [NoteSearch, NoteList],
+  imports: [NoteSearch, NoteList, RouterLink],
   selector: 'app-home-page',
   template: `
     <section class="flex flex-col gap-6">
@@ -16,7 +17,7 @@ import {NoteList} from './note-list/note-list';
 
     <div class="flex items-end gap-2">
       <app-note-search class="flex-1" />
-      <a hlmBtn variant="outline" routerLink="/notes/new">Créer</a>
+      <a hlmBtn variant="outline" routerLink="/create">Créer</a>
     </div>
 
     <app-note-list />
