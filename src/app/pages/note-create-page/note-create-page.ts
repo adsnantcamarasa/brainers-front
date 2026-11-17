@@ -1,9 +1,19 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
+import {NoteForm} from '../../components/note-form/note-form';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  imports: [],
+  imports: [NoteForm],
   selector: 'app-note-create-page',
-  styleUrl: './note-create-page.css',
   templateUrl: './note-create-page.html',
 })
-export class NoteCreatePage {}
+export class NoteCreatePage implements OnInit {
+  private readonly route = inject(ActivatedRoute);
+  protected noteId: string | null = null;
+
+  ngOnInit(): void {
+        this.noteId = this.route.snapshot.paramMap.get('id');
+  }
+
+
+}

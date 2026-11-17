@@ -5,7 +5,8 @@ import {NoteDetailPage} from './pages/note-detail-page/note-detail-page';
 
 export const routes: Routes = [
   {path: '', component : HomePage},
-  {path: 'create', component : NoteCreatePage},
-  {path: 'detail', component : NoteDetailPage},
+  {path: 'notes/new', component : NoteCreatePage},
+  {path: 'notes/:id/edit', component : NoteCreatePage},
+  {path: 'notes/:id', component : NoteDetailPage}, // {id} detail d'une page!
   {path:  '**', redirectTo: ''},
 ];

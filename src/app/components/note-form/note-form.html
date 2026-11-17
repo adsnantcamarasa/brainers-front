@@ -1,0 +1,30 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
+
+  <!-- Bloc Titre -->
+  <div class="flex flex-col gap-2">
+    <label hlmLabel for="note-title">Titre</label>
+    <input hlmInput id="note-title" formControlName="title" placeholder="Ex : Boucler sur une Map" />
+  </div> <!-- 💡 Corrigé : On ferme bien la div du titre ici ! -->
+
+  <!-- Bloc Contenu -->
+  <div class="flex flex-col gap-2">
+    <label hlmLabel for="note-content">Contenu</label>
+    <textarea
+      hlmTextarea
+      id="note-content"
+      formControlName="content"
+      class="min-h-48"
+      placeholder="Écris ta note ici..."
+    ></textarea>
+  </div>
+
+  <!-- Bloc Boutons -->
+  <div class="flex justify-end gap-2">
+    @if(noteId()){
+      <button hlmBtn type="submit">Modifier</button>
+    } @else {
+      <button hlmBtn type="submit">Enregistrer</button>
+    }
+    <button hlmBtn type="button" variant="outline" (click)="onCancel($event)">Annuler</button>
+  </div>
+</form>

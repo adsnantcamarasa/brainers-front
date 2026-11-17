@@ -1,1 +1,48 @@
-<p>note-detail-page works!</p>
+<section class="flex flex-col gap-6">
+  <a routerLink="/" class="text-muted-foreground w-fit text-sm hover:underline">← Retour aux notes</a>
+
+  @if (noteStatus === 'loading'){
+    <p class="text-muted-foreground text-sm">Chargement de la note…</p>
+  } @else if(noteStatus === 'notValidId'){
+    <p class="text-destructive text-sm">
+      Impossible de trouver l'id correspondant à la page.
+    </p>
+  } @else if (noteStatus === 'notFound'){
+    <div class="flex flex-col gap-2">
+      <h1 class="text-2xl font-semibold tracking-tight">Note introuvable</h1>
+      <p class="text-muted-foreground text-sm">Elle a peut-être été supprimée.</p>
+    </div>
+  } @else if (noteStatus === 'failed'){
+    <p class="text-destructive text-sm">
+      Impossible de charger la note. Vérifie que le back Spring est démarré, puis réessaie.
+    </p>
+  } @else if (note(); as current){
+
+    <!-- 💡 Conteneur Flex pour mettre le Titre à gauche et les Boutons alignés à droite -->
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <h1 class="text-3xl font-bold tracking-tight">Détails de la note</h1>
+
+      <!-- 💡 Groupe de boutons alignés proprement à droite -->
+      <div class="flex items-center gap-2">
+        <!-- Remplacement de type="submit" (réservé aux formulaires) par type="button" -->
+        <button hlmBtn type="button" variant="outline" (click)="onUpdate()">Modifier</button>
+        <button hlmBtn type="button" variant="destructive" (click)="onDelete($event)">Supprimer</button>
+      </div>
+    </div>
+
+    <article hlmCard>
+      <div hlmCardHeader>
+        <!-- 💡 On a retiré le h1 doublon d'ici pour épurer la carte -->
+        <p hlmCardDescription>
+          Créée le {{ current.createdAt | date: "d MMM y 'à' HH:mm" }} · Modifiée le
+          {{ current.lastUpdateAt | date: "d MMM y 'à' HH:mm" }}
+        </p>
+      </div>
+      <!-- 💡 Ajout du titre de la note en gros au début du contenu pour une belle hiérarchie -->
+      <div hlmCardContent class="flex flex-col gap-4">
+        <h2 class="text-2xl font-semibold tracking-tight text-foreground">{{ current.title }}</h2>
+        <p class="whitespace-pre-wrap text-muted-foreground">{{ current.content }}</p>
+      </div>
+    </article>
+  }
+</section>

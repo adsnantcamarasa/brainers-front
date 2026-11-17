@@ -1,0 +1,42 @@
+<form role="search" class="flex flex-col gap-3" (submit)="search($event)">
+  <label hlmLabel for="note-search">Rechercher une note par son titre</label>
+  <input
+    hlmInput
+    id="note-search"
+    type="search"
+    autocomplete="off"
+    placeholder="Ex : stream, maven…"
+    [formControl]="searchControl" />
+    <!-- Lien entre l'input et FormControl (searchControl) dans la classe-->
+
+  <div class="flex gap-2">
+    <button hlmBtn type="submit">Rechercher</button>
+    <!-- sert au parent pour insérer du html -->
+    <!-- C'est ici qu'on injectera, le bouton créer pourquoi ne pas l'écrire tout simplement ? car un formulaire a une seule action submit possible-->
+    <ng-content />
+  </div>
+</form>
+
+<div class="mt-6">
+  @switch (status()) {
+    @case (SearchState.Init) {
+      <p class="text-muted-foreground text-sm">
+        Tape un mot du titre, puis « Rechercher ». Champ vide : toutes les notes.
+      </p>
+    }
+    @case (SearchState.Loading) {
+      <p class="text-muted-foreground text-sm">Recherche en cours…</p>
+    }
+    @case (SearchState.Empty) {
+      <p class="text-muted-foreground text-sm">Aucune note trouvée. Essaie un autre mot, ou crée la note.</p>
+    }
+    @case (SearchState.Error) {
+      <p class="text-destructive text-sm">
+        La recherche a échoué. Vérifie que le back Spring est démarré (port 8080), puis réessaie.
+      </p>
+    }
+    @case (SearchState.Success) {
+      <app-note-list [notes]="notes()" />
+    }
+  }
+</div>
